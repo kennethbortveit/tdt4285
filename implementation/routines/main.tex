@@ -1,7 +1,15 @@
 \subsection{System Status Check}
 A status check of the services should be performed 5 times each workday within the operation period.\\
-These checks should include the following operations:
+These checks should include the following:
 \begin{itemize}
-\item Add new users to the wiki.
-\item 
+\item Check if there is any new wiki requests.
+\item Check if there is any new homepage requests.
+\item Check if the wiki service is up and running.
+\item Check if the homepage service is up and running.
+\end{itemize}
+\subsection{Operations}
+\begin{itemize}
+\item Add new users, if any, to the wikiservice and send confirmation mail to user.
+\item Add new users that have a personal home page request to the python script (script.py) and run it. Send a confirmation mail afterwards.
+\item If any of the services are having problems, try to locate and fix. If it cant be fixed, notify the team with a description of the situation.
 \end{itemize}
