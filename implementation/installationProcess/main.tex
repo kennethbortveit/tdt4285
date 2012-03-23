@@ -381,3 +381,71 @@ for u in users:
         os.system("chown " + u + " /var/www/" + u)
         os.system("ln -s /var/www/" + u + " /home/" + u + "/public_html")
 \end{lstlisting}
+
+\subsection{Monitoring NGINX}
+RRDs perl module is used in order to monitor NGINX server. The installation is as follows:
+\begin{itemize}
+\item Modify http section nginx config file:\\
+server\{ \\
+listen SOME.IP.ADD.RESS;\\
+... \\
+location /nginx\_status \{ \\
+stub\_status on; \\
+access\_log off; \\
+allow SOME.IP.ADD.RESS; \\
+deny all; \\
+... \\
+\} \\
+\item Test your new config file in order to ensure that it is all correct.
+\begin{itemize}
+\item sudo /etc/init.d/nginx configtest.
+\item nginx: the configuration file /etc/nginx/nginx.conf syntax is ok.
+\item nginx: configuration file /etc/nginx/nginx.conf test is successful.
+\end{itemize}
+\item Restart and reload the nginx server:
+\begin{itemize}
+\item Sudo service nginx reload.
+\item Sudo service nginx restart.
+\end{itemize}
+\item Now you can check whether it is all correct.
+\begin{itemize}
+\item wget tdt4285.idi.ntnu.no/nginx\_status \\
+Active connections: 8 \\
+server accepts handled requests \\
+ 3982 3982 10497 \\
+Reading: 0 Writing: 1 Waiting: 7 \\
+\end{itemize}
+\item Now copy the perl script nginx\_monitoring.pl and make it executable:
+\begin{itemize}
+\item Chmod 777 nginx\_monitoring.pl.
+\end{itemize}
+\item Here is where you can modify any setting (in perl script) such as where graphics will be saved: \\
+\#!/usr/bin/perl \\
+use RRDs; \\
+use LWP::UserAgent; \\
+
+\# define location of rrdtool databases \\
+my \$rrd = 'instalation\_path'; \\
+\# define location of images \\
+my \$img = ' instalation\_path/html'; \\
+\# define your nginx stats URL \\
+my \$URL = "http://your-domain.com/nginx\_status" \\
+\item Create the RRD database (in installation path) in which data will be stored :
+\begin{itemize}
+\item sudo rrdtool create nginx.rrd -s 60 \\
+DS:requests:COUNTER:120:0:100000000 \\
+DS:total:ABSOLUTE:120:0:60000 \\
+DS:reading:ABSOLUTE:120:0:60000 \\
+DS:writing:ABSOLUTE:120:0:60000 \\
+DS:waiting:ABSOLUTE:120:0:60000 \\
+RRA:AVERAGE:0.5:1:2880 \\
+RRA:AVERAGE:0.5:30:672 \\
+RRA:AVERAGE:0.5:120:732 \\
+RRA:AVERAGE:0.5:720:1460 \\
+\end{itemize}
+\item Finally, modify /etc/crontab file in order to get periodically each counter:
+\begin{itemize}
+\item ** *** root  /installation\_path/nginx\_monitoring.pl
+\end{itemize}
+\end{itemize}
+From now on, you will be able to see the tracking into the folder you defined.
