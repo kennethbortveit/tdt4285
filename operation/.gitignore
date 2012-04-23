@@ -1,0 +1,7 @@
+# These are ignored #
+#####################
+*.log
+*.gz
+*.pdf
+*.toc
+*.aux

@@ -1,0 +1,28 @@
+\section{Event Log}
+\subsection{ Power outages and downtime errors}
+We have seen our database records and log errors in order to find power outages in the server. Since there are not ‘holes’ in graphics and so in database, the server has been running correctly during the whole operation phase. In addition, logs errors do not show this kind of problem.
+\subsection{Common errors}
+By observing server logs, we have made a list containing the most common errors during this phase:
+\begin{itemize}
+\item{Directory Index forbidden by rule. \\}
+Example:
+\begin{lstlisting}
+[error] 14142#0: *36385 directory index of "/var/www/mediawiki/" is forbidden, client: 127.0.0.1, server: localhost, request: "GET / HTTP/1.0", host: "localhost"
+Looking for this kind of error, we can say that it is not severe.  It corresponds to non-allowed accesses (permissions issues).
+\end{lstlisting}
+\item{Open operations. \\}
+Example:
+\begin{lstlisting}
+[error] 14142#0: *71338 open() "/var/www/favicon.ico" failed (2: No such file or directory), client: 188.113.104.119, server: tdt4285.idi.ntnu.no, request: "GET /favicon.ico HTTP/1.1", host: "tdt4285.idi.ntnu.no"
+\end{lstlisting}
+\end{itemize}
+\subsection{Logs}
+All logs are stored in /var/log/nginx/. An useful command to look up errors is:
+\begin{lstlisting}
+>> sudo find . -name "errors*.gz" -exec zegrep {} -e "WHAT YOU WANT TO LOOK UP" \; | less
+\end{lstlisting}
+For example, if you want to see errors which happened in log errors:
+\begin{lstlisting}
+>> sudo find . -name "errors*.gz" -exec zegrep {} -e "2012/04/" \; | less
+\end{lstlisting}
+\pagebreak
