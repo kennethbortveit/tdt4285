@@ -1,0 +1,17 @@
+\contentsline {section}{\numberline {1}Introduction}{1}
+\contentsline {section}{\numberline {2}System Description}{2}
+\contentsline {subsection}{\numberline {2.1}NGINX}{2}
+\contentsline {subsection}{\numberline {2.2}MediaWiki}{2}
+\contentsline {subsection}{\numberline {2.3}MySQL}{2}
+\contentsline {subsection}{\numberline {2.4}PHP}{2}
+\contentsline {subsection}{\numberline {2.5}RRDTOOL}{3}
+\contentsline {subsection}{\numberline {2.6}How the system is tied together}{3}
+\contentsline {section}{\numberline {3}Installation Process}{3}
+\contentsline {subsection}{\numberline {3.1}Installing NGINX, PHP5 and MySQL on Debian Squeeze}{3}
+\contentsline {subsection}{\numberline {3.2}MediaWiki}{7}
+\contentsline {subsection}{\numberline {3.3}Create Personal Websites}{12}
+\contentsline {subsection}{\numberline {3.4}Monitoring NGINX}{13}
+\contentsline {section}{\numberline {4}Routines}{14}
+\contentsline {subsection}{\numberline {4.1}System Status Check}{14}
+\contentsline {subsection}{\numberline {4.2}Operations}{15}
+\contentsline {subsection}{\numberline {4.3}Monitoring}{15}
